@@ -246,19 +246,19 @@ class Home extends React.Component<Props, State>{
  
     if (ev.target.className != "component__li") {
       ev.target = this.closest(ev.target,".component__li");
-      let getScrollTop = this.getScrollTop();
-      let sum = ev.target.offsetTop + ev.target.offsetHeight / 2 + 74 - getScrollTop;
-      let obj = {
-        index: index,
-        h: sum,
-        e: ev.target
-      }
-      this.setState({
-        obj
-      })
+
     }
 
-  
+    let getScrollTop = this.getScrollTop();
+    let sum = ev.target.offsetTop + ev.target.offsetHeight / 2 + 74 - getScrollTop;
+    let obj = {
+      index: index,
+      h: sum,
+      e: ev.target
+    }
+    this.setState({
+      obj
+    })
  
   }
 

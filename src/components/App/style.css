@@ -222,11 +222,12 @@ body::-webkit-scrollbar-track {
   margin-bottom: 10px;
   
 }
-.drag__container :hover{
+/* .drag__container :hover{
   background-color: #f4f4f4;
   border: 1px solid #f4f4f4;
-}
-.drag__container .ant-radio-group {
+} */
+.drag__container .ant-radio-group,
+.drag__container .ant-checkbox-group {
   position: relative;
   top:2px;
   margin-left: 5px;
