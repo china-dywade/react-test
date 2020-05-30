@@ -17,7 +17,7 @@ class InputDefault extends React.Component<Props, State> {
     super(props);
     this.state = {...this.props.data}; 
   }
-
+  // console.log('hhhh')
   
   inputChange = (e:any) => {
    
