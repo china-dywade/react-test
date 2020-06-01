@@ -31,13 +31,12 @@ class RadioComponent extends React.Component<RadioProps, RadioState> {
   constructor(props: RadioProps) {
     super(props);
     this.state = { ...this.props.data.settingData };
-    let obj = this.getIntance();
-    this.props.setSettingData(obj);
+    // let obj = this.getIntance();
+    // this.props.setSettingData(obj);
   }
 
   unDatedSet = (state: any) => {
     let obj = this.getIntance();
-    this.props.mounted(this.props.index);
     this.props.setSettingData(obj, state, this.props.index);
     this.props.updateSettingData(state);
   }
@@ -93,6 +92,7 @@ class RadioComponent extends React.Component<RadioProps, RadioState> {
                 }, () => {
                   // 传给父组件 更新 store;
                   _this.unDatedSet(_this.state);
+                  _this.props.mounted(_this.props.index);
                 })
               }else{
                 _this.setState({
@@ -101,6 +101,7 @@ class RadioComponent extends React.Component<RadioProps, RadioState> {
                 }, () => {
                   // 传给父组件 更新 store;
                   _this.unDatedSet(_this.state);
+                  _this.props.mounted(_this.props.index);
                 })
               }
             }
@@ -157,9 +158,9 @@ class RadioComponent extends React.Component<RadioProps, RadioState> {
 
 
 
-  componentDidMount() {
-    this.props.mounted()
-  }
+  // componentDidMount() {
+  //   this.props.mounted()
+  // }
 
 
 

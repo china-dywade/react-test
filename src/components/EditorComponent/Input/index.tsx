@@ -21,13 +21,13 @@ class InputComponent extends React.Component<InputProps, InputState> {
   constructor(props: InputProps) {
     super(props);
     this.state = { ...this.props.data.settingData};
-    let obj = this.getIntance();
-    this.props.setSettingData(obj);
+    // let obj = this.getIntance();
+    // this.props.setSettingData(obj);
   }
 
-  componentDidMount() {
-    this.props.mounted()
-  }
+  // componentDidMount() {
+  //   this.props.mounted()
+  // }
   
 
 

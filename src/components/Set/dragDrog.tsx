@@ -33,11 +33,15 @@ class InputDefault extends React.Component<Props, State> {
 
   }
 
-  inputChange = (e: any) => {
+  inputChange = (index:number, e: any) => {
+    let arr = [...this.state.value];
+    arr[index].value = e.target.value;
     this.setState({
-      value: e.target.value
+      value: arr
+    },()=>{
+        this.props.data.callBack(arr);
     });
-    this.props.data.callBack(e.target.value);
+    
   }
 
   onDragEnd = (result:any) => {
@@ -102,19 +106,31 @@ class InputDefault extends React.Component<Props, State> {
                                   this.state.type == "radio" ?
                                     <Radio.Group value=''>
                                       <Row >                           
-                                          <Col span={24} key={comp.id} className="mbt_5">
+                                          <Col span={24} key={comp.id} className="mbt_5 row__li">
                                           <Radio value={ comp.value }>                                                                                  
-                                            { comp.value }
+                                           
                                            </Radio>
+                                          <Input className="sort__input" value={comp.value} onChange={this.inputChange.bind(this,index)}/>
+                                          {/* <span>
+                                            <span className="iconfont icontianjia"></span>
+                                            <span className="iconfont iconjian"></span>
+                                          </span> */}
+                                          
                                           </Col>                                          
                                       </Row>
                                     </Radio.Group>
                                     :
                                     <Checkbox.Group value={[]} >
                                       <Row>                              
-                                        <Col span={24} key={comp.id} className="mbt_5">
-                                          <Checkbox value={comp.value}>{comp.value}</Checkbox>
-                                        </Col>                                                                              
+                                        <Col span={24} key={comp.id} className="mbt_5 row__li">
+                                          <Checkbox value={comp.value}></Checkbox>
+                                          <Input className="sort__input" value={comp.value} onChange={this.inputChange.bind(this, index)}/>
+                                          {/* <span>
+                                            <span className="iconfont icontianjia"></span>
+                                            <span className="iconfont iconjian"></span>
+                                          </span> */}
+                                        </Col> 
+                                                                                                                     
                                       </Row>
                                     </Checkbox.Group>
                                 }

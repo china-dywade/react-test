@@ -66,7 +66,7 @@
 }
 .setting__container {
   font-size: 14px;
-  padding: 20px 40px;
+  padding: 10px 20px 20px 20px;
   position: fixed;
   right:-18%;
   top: 74px;
@@ -222,13 +222,29 @@ body::-webkit-scrollbar-track {
   margin-bottom: 10px;
   
 }
-/* .drag__container :hover{
+.drag__container:hover{
   background-color: #f4f4f4;
-  border: 1px solid #f4f4f4;
-} */
+}
 .drag__container .ant-radio-group,
 .drag__container .ant-checkbox-group {
   position: relative;
   top:2px;
   margin-left: 5px;
+   display: flex;
+}
+.row__li{
+  flex: auto;
+}
+.drag__container .sort__input {
+  width: 85%;
+  height: 22px;
+}
+.iconfont.icontuozhuai:hover{
+  cursor:move;
+}
+.drag__container .ant-checkbox-wrapper {
+  margin-right: 8px;
+}
+.ant-checkbox+span{
+  word-break: break-all;
 }

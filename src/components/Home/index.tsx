@@ -9,7 +9,7 @@ import footer from '../Footer'
 import SettingData from '../SettingData'
 import Menu from '../Menu';
 import { Button,  Modal ,Tooltip, Badge  } from 'antd';
-import { CopyOutlined, ExclamationCircleOutlined, NodeCollapseOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { log } from 'util';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -44,9 +44,7 @@ class Home extends React.Component<Props, State>{
   reorder:any;
 
 
-  public onCollapse = (collapsed: any) => {
-    this.setState({ collapsed });
-  };
+
   public showConfirm = (item:any)=> {
     let _this = this;
     confirm({
@@ -80,24 +78,27 @@ class Home extends React.Component<Props, State>{
     });
   }
 
+
+
+
   mounted = (index:number) => {
-  setTimeout(() => {
-    let a = this.myRef[index].getIntance();
-    this.setState({
-      settingData: null
-    },()=>{
+    setTimeout(() => {
+        let a = this.myRef[index].getIntance();
         this.setState({
-          settingData: { ...a }
+          settingData: null
+        },()=>{
+            this.setState({
+              settingData: { ...a }
+            })
         })
-    })
-    }, 0);
+      }, 0);
   }
 
 
 
   // 添加组件
   public addCompontHandler = (item: any, inx?: any, str?:any) => {
-    
+    let addIndex:number = 0;
     let currentArr = [];
     let arr = [...this.props.componentList];
     item = JSON.parse(JSON.stringify(item));
@@ -111,15 +112,18 @@ class Home extends React.Component<Props, State>{
         }else{
           arr.splice(inx, 0, item);
         }    
-          arr.splice(inx + 1, 0, remove);
-        
-        
+        arr.splice(inx + 1, 0, remove);  
+        inx - 1 <= 0 ? addIndex = inx : addIndex = inx;
       }else{
-        arr.splice(inx + 1 >= arr.length  ? arr.length : inx + 1, 0, item);
+        arr.splice(inx + 1 >= arr.length? arr.length: inx + 1, 0, item);
+        addIndex = inx + 1 >= arr.length-1 ? arr.length-1 : inx + 1;
       }
     }else{
       arr.push(item);
+      addIndex = arr.length-1;
     }
+    console.log(inx,str,addIndex,'addIndex=--- addIndex');
+    
     arr.map((ele) => {
       ele.checked = false;
     })
@@ -128,9 +132,15 @@ class Home extends React.Component<Props, State>{
     this.props.addCurrentSelectListCallBack && this.props.addCurrentSelectListCallBack(currentArr);
     this.props.addComponentToList && this.props.addComponentToList(arr);
     this.editoAndPriviewHandler(false);
-    this.setState({
-      settingData: null
-    })
+    
+    // this.setState({
+    //   settingData: null
+    // },()=>{
+      
+    // });
+
+    this.mounted(addIndex);
+
   }
 
   // 编辑 预览 点击事件
@@ -157,7 +167,7 @@ class Home extends React.Component<Props, State>{
 
   //  组件点击事件
   public componentClick = (item: any, index: number) => {
-    let a = this.myRef[index].getIntance()
+ 
     if (this.props.isPriview) {
       return;
     }
@@ -172,14 +182,8 @@ class Home extends React.Component<Props, State>{
     item.checked = true;
     this.props.addCurrentSelectListCallBack && this.props.addCurrentSelectListCallBack([item]);
     this.props.addComponentToList && this.props.addComponentToList(arr);
-    this.setState({
-      settingData:null
-    },()=>{
-        this.setState({
-          settingData: { ...a }
-        })
-    })
- 
+    this.mounted(index);
+
   }
 
   // 更新设置项
